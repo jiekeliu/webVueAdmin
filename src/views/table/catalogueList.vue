@@ -275,6 +275,7 @@ export default {
         if (valid) {
           const catalogue = Object.assign({}, this.catalogue)
           updateCatalogue(catalogue).then(res => {
+            this.dialogFormVisible = false
             if (res.status == "ok"){
               this.$notify({
                 title: 'Success',
