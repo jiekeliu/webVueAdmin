@@ -63,14 +63,8 @@ export const constantRoutes = [
       {
         path: 'catalogueList',
         name: '导航管理',
-        component: () => import('@/views/table/catalogueList'),
+        component: () => import('@/views/table/mateList'),
         meta: { title: '导航管理', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: '结构管理',
-        component: () => import('@/views/tree/index'),
-        meta: { title: '结构管理', icon: 'tree' }
       }
     ]
   },
