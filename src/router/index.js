@@ -70,14 +70,14 @@ export const constantRoutes = [
   },
 
   {
-    path: '/form',
+    path: '/upload',
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        path: '/imageManage',
+        name: '图片管理',
+        component: () => import('@/views/imageManage/ImageManage'),
+        meta: { title: '图片管理', icon: 'form' }
       }
     ]
   },
