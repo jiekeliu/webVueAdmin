@@ -4,66 +4,97 @@
 
       <sticky :z-index="10" :class-name="'sub-navbar '+postForm.status">
 
-        <el-button v-if="postForm.id" v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm" >
+        <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm" >
           发布
         </el-button>
-
-        <el-button v-else v-loading="loading" style="margin-left: 10px;" type="success" @click="createForm" >
-          创建
-        </el-button>
-
       </sticky>
 
       <div class="createPost-main-container">
         <el-row>
           <el-col :span="24">
-            <el-form-item style="margin-bottom: 40px;" prop="title">
-              <MDinput v-model="postForm.title" :maxlength="100" name="name" required>
-                Title
-              </MDinput>
-            </el-form-item>
 
             <div class="postInfo-container">
               <el-row>
-                <el-col :span="8">
-                  <el-form-item label-width="60px" label="Author:" class="postInfo-container-item">
-                    <el-select v-model="postForm.author" placeholder="请选择">
-                      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-                    </el-select>
+                <el-col :span="12">
+                  <el-form-item label-width="200px" label="网站名称:" class="postInfo-container-item">
+                    <el-input v-model="postForm.web_name"  maxlength="10" show-word-limit placeholder="请输入内容"></el-input>
                   </el-form-item>
                 </el-col>
 
-                <el-col :span="10">
-                  <el-form-item label-width="120px" label="Publish Time:" class="postInfo-container-item">
-                    <el-date-picker v-model="displayTime" type="datetime" format="yyyy-MM-dd HH:mm" placeholder="Select date and time" />
-                  </el-form-item>
-                </el-col>
-
-                <el-col :span="6">
-                  <el-form-item label-width="90px" label="Importance:" class="postInfo-container-item">
-                    <el-rate
-                      v-model="postForm.importance"
-                      :max="3"
-                      :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
-                      :low-threshold="1"
-                      :high-threshold="3"
-                      style="display:inline-block"
-                    />
+                <el-col :span="12">
+                  <el-form-item label-width="200px" label="网站icon:" class="postInfo-container-item">
+                    <el-input v-model="postForm.web_icon_url"  maxlength="255" show-word-limit placeholder="请输入内容"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
+
+              <el-row>
+                <el-col :span="12">
+                  <el-form-item label-width="200px" label="主页标题:" class="postInfo-container-item">
+                    <el-input v-model="postForm.web_title"  maxlength="15" show-word-limit placeholder="请输入内容"></el-input>
+                  </el-form-item>
+                </el-col>
+
+                <el-col :span="12">
+                  <el-form-item label-width="200px" label="主页副标题:" class="postInfo-container-item">
+                    <el-input v-model="postForm.web_subtitle"  maxlength="30" show-word-limit placeholder="请输入内容"></el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+
+              <el-row>
+                <el-col :span="12">
+                  <el-form-item label-width="200px" label="网站背景图链接:" class="postInfo-container-item">
+                    <el-input v-model="postForm.web_bgimg_url"  maxlength="255" show-word-limit placeholder="请输入内容"></el-input>
+                  </el-form-item>
+                </el-col>
+
+                <el-col :span="12">
+                  <el-form-item label-width="200px" label="管理者:" class="postInfo-container-item">
+                    <el-input v-model="postForm.web_manager"  maxlength="255" show-word-limit placeholder="请输入内容"></el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+
+              <el-row>
+                <el-col :span="12">
+                  <el-form-item label-width="200px" label="网站介绍背景图地址:" class="postInfo-container-item">
+                    <el-input v-model="postForm.web_describe_img_url"  maxlength="255" show-word-limit placeholder="请输入内容"></el-input>
+                  </el-form-item>
+                </el-col>
+
+                <el-col :span="12">
+                  <el-form-item label-width="200px" label="备案号:" class="postInfo-container-item">
+                    <el-input v-model="postForm.web_code"  maxlength="255" show-word-limit placeholder="请输入内容"></el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+
+              <el-row>
+                <el-col :span="12">
+                  <el-form-item label-width="200px" label="文章背景图连接:" class="postInfo-container-item">
+                    <el-input v-model="postForm.article_bg_url"  maxlength="255" show-word-limit placeholder="请输入内容"></el-input>
+                  </el-form-item>
+                </el-col>
+
+                <el-col :span="12">
+                  <el-form-item label-width="200px" label="管理者联系方式:" class="postInfo-container-item">
+                    <el-input v-model="postForm.web_connection"  maxlength="255" show-word-limit placeholder="请输入内容"></el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+
+              <el-row>
+                <el-col :span="12">
+                  <el-form-item label-width="200px" label="网站介绍:" class="postInfo-container-item">
+                    <Tinymce ref="editor" v-model="postForm.web_describe" :height="400" />
+                  </el-form-item>
+                </el-col>
+              </el-row>
+
             </div>
           </el-col>
         </el-row>
-
-        <el-form-item style="margin-bottom: 40px;" label-width="70px" label="Summary:">
-          <el-input v-model="postForm.content_short" :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please enter the content" />
-          <span v-show="contentShortLength" class="word-counter">{{ contentShortLength }}words</span>
-        </el-form-item>
-
-        <el-form-item prop="content" style="margin-bottom: 30px;">
-          <Tinymce ref="editor" v-model="postForm.content" :height="400" />
-        </el-form-item>
 
       </div>
     </el-form>
@@ -76,26 +107,27 @@ import Upload from '@/components/Upload/SingleImage3'
 import MDinput from '@/components/MDinput'
 import Sticky from '@/components/Sticky' // 粘性header组件
 import { validURL } from '@/utils/validate'
-import { fetchArticle,updateArticle,createArticle } from '@/api/article'
+import { getWebInfo,updateWebInfo } from '@/api/webinfo'
 import Warning from './Warning'
 import { CommentDropdown, PlatformDropdown, SourceUrlDropdown } from './Dropdown'
 
 const defaultForm = {
   status: 'draft',
-  title: '', // 文章题目
-  content: '', // 文章内容
-  content_short: '', // 文章摘要
-  source_uri: '', // 文章外链
-  image_uri: '', // 文章图片
-  display_time: undefined, // 前台展示时间
-  id: undefined,
-  platforms: ['a-platform'],
-  comment_disabled: false,
-  importance: 0
+  web_icon_url: 'null', //网站icon链接
+  web_name: 'null', // 网站名称
+  web_title: 'null', // 网站标题
+  web_subtitle: 'null', // 网站副标题
+  web_bgimg_url: 'null', // 网站背景图链接
+  web_manager: 'null', // 网站管理者(关联用户列表)
+  web_describe: 'null', // 关于网站
+  web_describe_img_url: 'null', // 关于网站背景图地址
+  web_code: 'null', // 网站备案号
+  article_bg_url: 'null', // 文章背景图
+  web_connection: 'null' // 站长联系方式
 }
 
 export default {
-  name: 'ArticleDetail',
+  name: 'WebInfoDetail',
   components: { Tinymce, MDinput, Upload, Sticky, Warning, CommentDropdown, PlatformDropdown, SourceUrlDropdown },
   props: {
     isEdit: {
@@ -169,33 +201,19 @@ export default {
     }
   },
   created() {
-    if (this.isEdit) {
-      const id = this.$route.params && this.$route.params.id
-      this.fetchData(id)
-    }
+    this.getWebInfoData()
     this.tempRoute = Object.assign({}, this.$route)
   },
   methods: {
-    fetchData(id) {
-      fetchArticle(id).then(response => {
-        this.postForm = response.data
-        this.setTagsViewTitle()
-        this.setPageTitle()
-      }).catch(err => {
-        console.log(err)
+
+    getWebInfoData(){
+      getWebInfo().then(res =>{
+        this.postForm = res.data.items
       })
     },
-    setTagsViewTitle() {
-      const title = '文章编辑 序号'
-      const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.postForm.id}` })
-      this.$store.dispatch('tagsView/updateVisitedView', route)
-    },
-    setPageTitle() {
-      const title = '文章编辑 序号'
-      document.title = `${title} - ${this.postForm.id}`
-    },
+
     submitForm() {
-      updateArticle(this.postForm).then(res =>{
+      updateWebInfo(this.postForm).then(res =>{
           if (res.status == "ok") {
               this.loading = true
               this.$notify({
@@ -212,37 +230,6 @@ export default {
           }
       })
     },
-    createForm() {
-        if (this.postForm.content.length === 0 || this.postForm.title.length === 0) {
-            this.$message({
-                message: '请填写必要的标题和内容',
-                type: 'warning'
-            })
-            return
-        }
-
-        this.postForm.platforms = ""
-        createArticle(this.postForm).then(res => {
-
-            if (res.status == "ok"){
-                this.$message({
-                    message: res.info ,
-                    type: 'success',
-                    showClose: true,
-                    duration: 1000
-                })
-                this.postForm.status = 'created'
-            }else {
-                this.$message({
-                    message: res.info,
-                    type: 'error',
-                    showClose: true,
-                    duration: 1000
-                })
-            }
-
-        })
-    }
   }
 }
 </script>

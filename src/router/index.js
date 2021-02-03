@@ -75,7 +75,6 @@ export const constantRoutes = [
     children: [
       {
         path: '/imageManage',
-        name: '图片管理',
         component: () => import('@/views/imageManage/ImageManage'),
         meta: { title: '图片管理', icon: 'form' }
       }
@@ -115,12 +114,14 @@ export const constantRoutes = [
 
 
   {
-    path: 'external-link',
+    path: '/web',
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: '/webinfo',
+        name: '网站管理',
+        component: () => import('@/views/webinfo/webinfoedit'),
+        meta: { title: '网站管理', icon: 'form' }
       }
     ]
   },
