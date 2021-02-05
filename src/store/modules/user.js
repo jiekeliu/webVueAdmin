@@ -33,10 +33,16 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        resolve()
+        console.log(response)
+        if (response.data.token == "success"){
+          const { data } = response
+          commit('SET_TOKEN', data.token)
+          setToken(data.token)
+          resolve()
+        }else {
+          alert(response.data.info)
+          this.$router.go(0)
+        }
       }).catch(error => {
         reject(error)
       })
